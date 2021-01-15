@@ -1,7 +1,8 @@
 import * as SessionApiUtil from "../util/session_api_util"
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
-export const REMOVE_CURRENT_USER =  'REMOVE_CURRENT_USER';
+export const LOGOUT_CURRENT_USER =  'LOGOUT_CURRENT_USER';
+export const ERRORS = 'ERRORS';
 
 export const receiveCurrentUser = user =>({
     type: RECEIVE_CURRENT_USER,
@@ -9,9 +10,26 @@ export const receiveCurrentUser = user =>({
 });
 
 export const logoutCurrentUser = () =>({
-    type: REMOVE_CURRENT_USER
+    type: LOGOUT_CURRENT_USER
 });
 
-export const receiveErrors = [errors]) =>({
-    type:
-}) 
+export const receiveErrors = ([errors]) =>({
+    type: ERRORS
+    [errors]
+}); 
+
+
+
+
+
+export const login = user => dispatch => (
+    SessionApiUtil.postSession(user).then(user => dispatch(receiveCurrentUser(user)))
+);
+
+export const logout = () => dispatch => (
+    SessionApiUtil.deleteSession.then( () => dispatch(logoutCurrentUser()))
+);
+
+export const signup = user => dispatch => (
+    SessionApiUtil.postUser(user).then(user => dispatch(receiveCurrentUser(user)))
+);
