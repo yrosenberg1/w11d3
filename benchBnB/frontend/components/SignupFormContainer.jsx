@@ -4,7 +4,7 @@ import SessionForm from './SessionForm';
 const mSTP = ({ errors}) => {
     return {
         errors: errors.session,
-        formType: 'login',
+        formType: 'signup',
 
     };
 };
@@ -12,7 +12,7 @@ const mSTP = ({ errors}) => {
 
 const mDTP = dispatch => {
     return {
-        processForm: user => dispatch(login(user)),
+        processForm: user => dispatch(Signup(user))
     }
 };
 
